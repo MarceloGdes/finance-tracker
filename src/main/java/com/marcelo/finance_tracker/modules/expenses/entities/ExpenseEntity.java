@@ -1,8 +1,6 @@
 package com.marcelo.finance_tracker.modules.expenses.entities;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -12,7 +10,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,17 +19,13 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity(name = "expenses")
 public class ExpenseEntity {
-    
-    //TO DO: criar um repositório para essa entidade e tentar salvar os dados na tabela para teste
 
-    @Id()
+    @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true)
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int expenseNumber;
+    @Column(unique = true, nullable = false)
+    private Integer expenseNumber;
 
     private String description;
 
