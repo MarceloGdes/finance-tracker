@@ -1,15 +1,12 @@
 package com.marcelo.finance_tracker.modules.expenses.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,17 +21,24 @@ public class ExpenseEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true, nullable = false, updatable = false)
     private Integer expenseNumber;
 
     private String description;
 
+    @Column(nullable = false)
     private Double totalValue;
 
     private boolean paid;
 
-    // @OneToOne
-    // private List<ExpenseTypeEntity> expenseType;
+    @Column(insertable=false, updatable=false)
+    private UUID expenseTypeID;
+
+    @ManyToOne
+    @JoinColumn(name = "expenseTypeID")
+    private ExpenseTypeEntity expenseType;
+
+    private UUID createdByUserID;
 
     @CreationTimestamp
     private LocalDateTime cretatedAt;
