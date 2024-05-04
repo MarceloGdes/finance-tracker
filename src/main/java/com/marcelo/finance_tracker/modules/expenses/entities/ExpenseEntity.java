@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -14,7 +15,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity(name = "expenses")
+@Builder
+@Entity(name = "expense")
 public class ExpenseEntity {
 
     @Id
@@ -24,6 +26,7 @@ public class ExpenseEntity {
     @Column(unique = true, nullable = false, updatable = false)
     private Integer expenseNumber;
 
+
     private String description;
 
     @Column(nullable = false)
@@ -31,14 +34,16 @@ public class ExpenseEntity {
 
     private boolean paid;
 
-    @Column(insertable=false, updatable=false)
-    private UUID expenseTypeID;
-
     @ManyToOne
-    @JoinColumn(name = "expenseTypeID")
+    @JoinColumn(name = "expense_type_id", unique = false)
     private ExpenseTypeEntity expenseType;
 
-    private UUID createdByUserID;
+
+    @OneToMany(mappedBy = "expense")
+    private List<ExpenseClassificationMappingEntity> classifications;
+
+//    @Column(nullable = true)
+//    private UUID createdByUserID;
 
     @CreationTimestamp
     private LocalDateTime cretatedAt;
