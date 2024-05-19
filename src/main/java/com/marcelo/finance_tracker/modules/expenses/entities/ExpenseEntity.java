@@ -17,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 @Entity(name = "expense")
+
 public class ExpenseEntity {
 
     @Id
@@ -40,7 +41,10 @@ public class ExpenseEntity {
 
 
     @OneToMany(mappedBy = "expense")
-    private List<ExpenseClassificationMappingEntity> classifications;
+    private List<ExpenseClassificationMappingEntity> classificationsMapping;
+
+    @OneToMany(mappedBy = "expense")
+    private List<ExpenseInstallmentEntity> installments;
 
 //    @Column(nullable = true)
 //    private UUID createdByUserID;

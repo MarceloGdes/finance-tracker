@@ -1,12 +1,9 @@
 package com.marcelo.finance_tracker.modules.expenses.controllers;
 
-import com.marcelo.finance_tracker.modules.expenses.dto.ExpenseDTO;
-import com.marcelo.finance_tracker.modules.expenses.usecases.CreateNewExpenseUseCase;
+import com.marcelo.finance_tracker.modules.expenses.dto.ExpenseRequestDTO;
+import com.marcelo.finance_tracker.modules.expenses.services.CreateNewExpenseService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.marcelo.finance_tracker.modules.expenses.entities.ExpenseEntity;
-import com.marcelo.finance_tracker.modules.expenses.repositories.ExpenseRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,11 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ExpensesController {
 
 
-    @Autowired private CreateNewExpenseUseCase createNewExpenseUseCase;
+    @Autowired private CreateNewExpenseService createNewExpenseUseCase;
 
 
     @PostMapping("/new") //TODO: criar validação de comparação de descrições do tipo da conta
-    public ResponseEntity<Object> newExpense(@RequestBody ExpenseDTO expense) {
+    public ResponseEntity<Object> newExpense(@RequestBody ExpenseRequestDTO expense) {
         return ResponseEntity.ok().body(createNewExpenseUseCase.execute(expense));
     }
     

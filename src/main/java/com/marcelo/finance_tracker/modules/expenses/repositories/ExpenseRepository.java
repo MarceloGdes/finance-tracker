@@ -12,6 +12,7 @@ import com.marcelo.finance_tracker.modules.expenses.entities.ExpenseEntity;
 @Repository
 public interface ExpenseRepository extends JpaRepository<ExpenseEntity, UUID> {
 
+
     @Query("SELECT max(expenseNumber) FROM expense")
     Integer findMaxExpenseNumber();
 }

@@ -1,5 +1,8 @@
 package com.marcelo.finance_tracker.modules.expenses.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,6 +25,7 @@ public class ExpenseClassificationMappingEntity {
     private UUID id;
 
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "expense_id", nullable = false)
     private ExpenseEntity expense;
 
