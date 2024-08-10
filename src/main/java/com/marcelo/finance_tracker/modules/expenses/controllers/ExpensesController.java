@@ -1,7 +1,7 @@
 package com.marcelo.finance_tracker.modules.expenses.controllers;
 
 import com.marcelo.finance_tracker.modules.expenses.dto.ExpenseRequestDTO;
-import com.marcelo.finance_tracker.modules.expenses.services.CreateNewExpenseService;
+import com.marcelo.finance_tracker.modules.expenses.services.ExpenseService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class ExpensesController {
 
 
-    @Autowired private CreateNewExpenseService createNewExpenseUseCase;
+    @Autowired private ExpenseService createNewExpenseUseCase;
 
 
     @PostMapping("/new") //TODO: criar validação de comparação de descrições do tipo da conta

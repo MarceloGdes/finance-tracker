@@ -8,16 +8,16 @@ import org.springframework.stereotype.Service;
 import com.marcelo.finance_tracker.modules.expenses.repositories.ExpenseRepository;
 
 @Service
-public class CreateNewExpenseService {
+public class ExpenseService {
     
     @Autowired
     private ExpenseRepository expenseRepository;
 
     @Autowired
-    private CreateExpenseInstallmentsService createExpenseInstallmens;
+    private ExpenseInstallmentsService expenseInstallmensService;
 
     @Autowired
-    private CreateExpenseClassificationMappingService createClassificationMapping;
+    private ExpenseClassificationMappingService classificationMappingService;
 
     public ExpenseEntity execute(ExpenseRequestDTO dto) {
 
@@ -38,8 +38,8 @@ public class CreateNewExpenseService {
 
         ExpenseEntity createdExpenseEntity = expenseRepository.save(expense);
 
-        var classifications = createClassificationMapping.execute(dto, createdExpenseEntity);
-        var createdInstallments = createExpenseInstallmens.execute(dto, createdExpenseEntity);
+        var classifications = classificationMappingService.execute(dto, createdExpenseEntity);
+        var createdInstallments = expenseInstallmensService.execute(dto, createdExpenseEntity);
 
         createdExpenseEntity.setClassificationsMapping(classifications);
         createdExpenseEntity.setInstallments(createdInstallments);

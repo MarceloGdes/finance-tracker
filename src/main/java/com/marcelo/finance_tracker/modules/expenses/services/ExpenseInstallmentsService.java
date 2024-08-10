@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Service
-public class CreateExpenseInstallmentsService {
+public class ExpenseInstallmentsService {
 
     @Autowired
     private ExpenseInstallmentRepository expenseInstallmentRepository;

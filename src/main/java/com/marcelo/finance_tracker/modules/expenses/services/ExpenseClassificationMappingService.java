@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class CreateExpenseClassificationMappingService {
+public class ExpenseClassificationMappingService {
 
     @Autowired
     private ExpenseClassificationMappingRepository expenseClassificationMappingRepository;
