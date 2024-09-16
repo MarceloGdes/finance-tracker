@@ -12,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ExpenseRequestDTO {
-
+    private UUID id;
     private String description;
     private Double totalValue;
     private boolean paid;

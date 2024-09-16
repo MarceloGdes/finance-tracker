@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.marcelo.finance_tracker.modules.expenses.repositories.ExpenseRepository;
 
+import java.util.Optional;
+
 @Service
 public class ExpenseService {
     
@@ -19,7 +21,7 @@ public class ExpenseService {
     @Autowired
     private ExpenseClassificationMappingService classificationMappingService;
 
-    public ExpenseEntity execute(ExpenseRequestDTO dto) {
+    public ExpenseEntity create(ExpenseRequestDTO dto) {
 
         //TODO: Fazer validações para verificar se o id passado no DTO existe no banco e completar as informações no
         // builder, separa em use case diferente. O Postgres ja realiza esta verificação mas o ideal e realizar em codigo
@@ -33,7 +35,7 @@ public class ExpenseService {
                 .totalValue(dto.getTotalValue())
                 .paid(dto.isPaid())
                 .expenseType(expenseType)
-                .expenseNumber(getNextExpenseNumber()) //TODO: Separar esta função em outro use case
+                .expenseNumber(getNextExpenseNumber())
                 .build();
 
         ExpenseEntity createdExpenseEntity = expenseRepository.save(expense);
